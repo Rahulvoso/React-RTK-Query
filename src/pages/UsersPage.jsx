@@ -27,8 +27,6 @@ export default function UsersPage() {
         search,
     });
 
-    console.log("AA");
-
 
 
     const [createUser] = useCreateUserMutation();
