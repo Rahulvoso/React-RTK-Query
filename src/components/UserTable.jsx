@@ -1,27 +1,17 @@
-export default function UserTable({
-    users = [],
-    onEdit,
-    onDelete,
-}) {
-    return (
-        <div className="w-full overflow-x-auto">
+import React from "react";
 
-            <table className="w-full border-collapse bg-white rounded-lg overflow-hidden shadow">
+function UserTable({ users, onEdit, onDelete }) {
+    return (
+        <div className="overflow-x-auto bg-white shadow rounded-lg">
+
+            <table className="w-full border-collapse">
 
                 {/* HEADER */}
-                <thead className="bg-gray-100 border-b">
+                <thead className="bg-gray-100">
                     <tr>
-                        <th className="text-left p-4 text-sm font-semibold text-gray-600">
-                            Name
-                        </th>
-
-                        <th className="text-left p-4 text-sm font-semibold text-gray-600">
-                            Email
-                        </th>
-
-                        <th className="text-center p-4 text-sm font-semibold text-gray-600">
-                            Actions
-                        </th>
+                        <th className="text-left p-4">Name</th>
+                        <th className="text-left p-4">Email</th>
+                        <th className="text-center p-4">Actions</th>
                     </tr>
                 </thead>
 
@@ -30,10 +20,7 @@ export default function UserTable({
 
                     {users.length === 0 ? (
                         <tr>
-                            <td
-                                colSpan="3"
-                                className="text-center p-10 text-gray-400"
-                            >
+                            <td colSpan="3" className="text-center p-10">
                                 No users found
                             </td>
                         </tr>
@@ -41,44 +28,33 @@ export default function UserTable({
                         users.map((u) => (
                             <tr
                                 key={u.id}
-                                className="border-b hover:bg-gray-50 transition"
+                                className="border-b hover:bg-gray-50"
                             >
+                                <td className="p-4">{u.name}</td>
 
-                                {/* NAME */}
-                                <td className="p-4 font-medium text-gray-800">
-                                    {u.name}
+                                <td className="p-4 text-blue-600">
+                                    {u.email}
                                 </td>
 
-                                {/* EMAIL */}
-                                <td className="p-4">
-                                    <span className="px-3 py-1 text-sm bg-blue-50 text-blue-600 rounded-full">
-                                        {u.email}
-                                    </span>
-                                </td>
-
-                                {/* ACTIONS */}
-                                <td className="p-4">
+                                <td className="p-4 text-center">
                                     <div className="flex justify-center gap-2">
 
-                                        {/* EDIT */}
                                         <button
                                             onClick={() => onEdit(u)}
-                                            className="px-3 py-1 text-sm rounded-md bg-yellow-400 text-white hover:bg-yellow-500 transition"
+                                            className="px-3 py-1 bg-yellow-400 text-white rounded"
                                         >
                                             Edit
                                         </button>
 
-                                        {/* DELETE */}
                                         <button
                                             onClick={() => onDelete(u.id)}
-                                            className="px-3 py-1 text-sm rounded-md bg-red-500 text-white hover:bg-red-600 transition"
+                                            className="px-3 py-1 bg-red-500 text-white rounded"
                                         >
                                             Delete
                                         </button>
 
                                     </div>
                                 </td>
-
                             </tr>
                         ))
                     )}
@@ -89,3 +65,6 @@ export default function UserTable({
         </div>
     );
 }
+
+// ✅ CRITICAL PERFORMANCE FIX
+export default React.memo(UserTable);

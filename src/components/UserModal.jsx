@@ -1,64 +1,73 @@
-import { useState, useEffect } from "react";
+import React from "react";
 
-export default function UserModal({
-    open,
-    onClose,
-    onSave,
-    editData,
-}) {
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
+function UserModal({ open, onClose, onSave, editData }) {
 
-    useEffect(() => {
-        if (editData) {
-            setName(editData.name);
-            setEmail(editData.email);
-        } else {
-            setName("");
-            setEmail("");
-        }
-    }, [editData, onSave]);
+    console.log("User Model");
 
     if (!open) return null;
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const form = {
+            id: editData?.id,
+            name: e.target.name.value,
+            email: e.target.email.value,
+        };
+
+        onSave(form);
+    };
+
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="bg-white p-5 rounded w-96">
-                <h2 className="text-xl font-bold mb-3">
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
+
+            <div className="bg-white p-6 rounded-lg w-96">
+
+                <h2 className="text-xl mb-4">
                     {editData ? "Edit User" : "Add User"}
                 </h2>
 
-                <input
-                    className="border p-2 w-full mb-2"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Name"
-                />
+                <form onSubmit={handleSubmit}>
 
-                <input
-                    className="border p-2 w-full mb-2"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
-                />
+                    <input
+                        name="name"
+                        defaultValue={editData?.name || ""}
+                        className="border p-2 w-full mb-3"
+                        placeholder="Name"
+                    />
 
-                <div className="flex justify-end gap-2">
-                    <button onClick={onClose}>Cancel</button>
+                    <input
+                        name="email"
+                        defaultValue={editData?.email || ""}
+                        className="border p-2 w-full mb-3"
+                        placeholder="Email"
+                    />
 
-                    <button
-                        className="bg-blue-500 text-white px-3 py-1"
-                        onClick={() =>
-                            onSave({
-                                id: editData?.id,
-                                name,
-                                email,
-                            })
-                        }
-                    >
-                        Save
-                    </button>
-                </div>
+                    <div className="flex justify-end gap-2">
+
+                        <button
+                            type="button"
+                            onClick={onClose}
+                            className="px-3 py-1 bg-gray-300 rounded"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            className="px-3 py-1 bg-blue-600 text-white rounded"
+                        >
+                            Save
+                        </button>
+
+                    </div>
+
+                </form>
+
             </div>
         </div>
     );
 }
+
+// 🔥 IMPORTANT FIX
+export default React.memo(UserModal);

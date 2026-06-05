@@ -4,8 +4,7 @@ export const userApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         // GET (Search + Pagination)
         getUsers: builder.query({
-            query: ({ page = 1, limit = 5, search = "" }) =>
-                `/users?page=${page}&limit=${limit}&name=${search}&sortBy=id&order=desc`,
+            query: ({ page = 1, limit = 5, search = "" }) => `/users?page=${page}&limit=${limit}&name=${search}&sortBy=id&order=desc`,
 
             providesTags: ["Users"],
         }),
