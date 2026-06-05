@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Rahul",
+      "email": "rahul@gmail.com"
+    },
+    {
+      "id": "2",
+      "name": "Amit",
+      "email": "amit@gmail.com"
+    },
+    {
+      "id": "3",
+      "name": "John",
+      "email": "john@gmail.com"
+    },
+    {
+      "name": "Rahul Gothi",
+      "email": "rahulberchha@gmail.com",
+      "id": "Q2piP17zfkM"
+    },
+    {
+      "name": "Rahul New",
+      "email": "rahul@gmail.com",
+      "id": "3o-bP9fRn5Q"
+    },
+    {
+      "name": "Rahul Gothi Dev !",
+      "email": "dev@gmail.com",
+      "id": "D0jsdv0AMB4"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

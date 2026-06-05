@@ -1,10 +1,10 @@
-import ProductList from "./pages/ProductList"
+import UsersPage from "./pages/UsersPage"
 
 function App() {
 
   return (
     <>
-      <ProductList />
+      <UsersPage />
     </>
   )
 }
